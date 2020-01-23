@@ -10,6 +10,11 @@ namespace TravelExperts
     {
         /// <summary>
         /// The main entry point for the application.
+        /// 
+        /// Nelson - Products Add/Modify Form
+        /// Steven - Main form / Login
+        /// Evan - Packages Add/Modify Form
+        /// 
         /// </summary>
         [STAThread]
         static void Main()
