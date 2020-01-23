@@ -12,6 +12,8 @@ namespace TravelExperts
 {
     public partial class Form1 : Form
     {
+        DataClasses1DataContext DataContext = new DataClasses1DataContext();
+       
         public Form1()
         {
             InitializeComponent();
