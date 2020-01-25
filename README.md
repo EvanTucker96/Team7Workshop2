@@ -2,7 +2,7 @@
 OOSD Threaded Project for Team 7 2020.
 
 ## Objective
-    In order that employees of Travel Experts can administer the data stored on their database, they need an application that will provide a graphical interface for viewing and modifying the data.  At this point, they have identified the tables that are most important, and request that access to these be developed as a prototype.
+In order that employees of Travel Experts can administer the data stored on their database, they need an application that will provide a graphical interface for viewing and modifying the data.  At this point, they have identified the tables that are most important, and request that access to these be developed as a prototype.
 
 The database that will be used for this workshop has been provided on the O: drive in the pickup\PROJ207 Threaded Workshop\Database Files directory, and must be imported into a SQLServer database.  You can build your application using the existing database structure. However, there may be minor improvements that would make your programming easier, so you are free to make improvements to the database.
 
