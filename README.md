@@ -23,5 +23,6 @@ Make sure that you validate the data before creating the package:
 All documentation is within the .cs source files within the production branch.
 
 ## Members
-- (@Evan Tucker)[https://github.com/EvanTucker96/]
-- (@Steven Hillman)[https://github.com/steven-hillman]
+- [@Evan Tucker](https://github.com/EvanTucker96/)
+- [@Steven Hillman](https://github.com/steven-hillman)
+- [@Nelson McCullough](https://github.com/nelsondev)
