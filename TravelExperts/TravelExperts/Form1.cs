@@ -10,20 +10,13 @@ using System.Windows.Forms;
 
 namespace TravelExperts
 {
-    public partial class MainForm : Form
+    public partial class Form1 : Form
     {
         DataClasses1DataContext DataContext = new DataClasses1DataContext();
        
-        public MainForm()
+        public Form1()
         {
             InitializeComponent();
-        }
-
-        private void btnProducts_Click(object sender, EventArgs e)
-        {
-            ProductsForm PF = new ProductsForm();
-            PF.Show();
-            this.Hide();
         }
     }
 }
