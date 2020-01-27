@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExperts.Data;
 using TravelExperts.Utility;
@@ -40,17 +38,9 @@ namespace TravelExperts.Forms
             return DataContext.Products.ToArray()[index];
         }
 
-        private List<Supplier> GetSuppliers(int productId)
+        private Supplier[] GetSuppliers(int productId)
         {
-            var query = from Supplier
-                            in DataContext.Suppliers
-                        join Product_Supplier
-                            in DataContext.Products_Suppliers
-                            on productId equals Product_Supplier.ProductId
-                        where Supplier.SupplierId == Product_Supplier.SupplierId
-                        select Supplier;
-
-            return query.ToList();
+            return Util.Get(DataContext.Suppliers.ToArray(), DataContext.Products_Suppliers.ToArray(), productId);
         }
 
         private void SetValueLabel(Label label, string value)
@@ -64,7 +54,7 @@ namespace TravelExperts.Forms
             var index = GetProductIndex(productId);
             var totalProducts = DataContext.Products.Count().ToString();
             var totalSuppliers = DataContext.Suppliers.Count().ToString(); ;
-            var totalProductSuppliers = GetSuppliers(productId).Count.ToString();
+            var totalProductSuppliers = GetSuppliers(productId).Length.ToString();
 
             // Set text boxes
             textBox_Id.Text = product.ProductId.ToString();
@@ -79,6 +69,30 @@ namespace TravelExperts.Forms
             label_TotalOrders.Text = $"{index+1} / {totalProducts}";
         }
 
+        private void AddSupplierGridItem(Supplier supplier)
+        {
+            // Add new data to data grid view
+            dataGridView_Suppliers.Rows.Add(new string[]
+            {
+                    supplier.SupplierId.ToString(),
+                    supplier.SupName,
+                    "x"
+            });
+        }
+
+        private void AddProductGridItem(Product product)
+        {
+            var i = GetProductIndex(product.ProductId);
+
+            // Add new data to data grid view
+            dataGridView_Products.Rows.Add(new string[]
+            {
+                    (i+1).ToString(), // list index
+                    product.ProductId.ToString(),
+                    product.ProdName
+            });
+        }
+
         private void FillGridBox(int productId)
         {
             var products = DataContext.Products.ToList();
@@ -90,30 +104,10 @@ namespace TravelExperts.Forms
             dataGridView_Products.Rows.Clear();
 
             // Fill suppliers data grid
-            suppliers.ForEach(supplier =>
-            {
-                // Add new data to data grid view
-                dataGridView_Suppliers.Rows.Add(new string[]
-                {
-                    supplier.SupplierId.ToString(),
-                    supplier.SupName,
-                    "x"
-                });
-            });
+            suppliers.ToList().ForEach(AddSupplierGridItem);
 
             // Fill products data grid
-            products.ForEach(prod =>
-            {
-                var i = GetProductIndex(prod.ProductId);
-
-                // Add new data to data grid view
-                dataGridView_Products.Rows.Add(new string[]
-                {
-                    (i+1).ToString(), // list index
-                    prod.ProductId.ToString(),
-                    prod.ProdName
-                });
-            });
+            products.ForEach(AddProductGridItem);
 
             dataGridView_Suppliers.ClearSelection();
             dataGridView_Products.ClearSelection();
@@ -219,8 +213,9 @@ namespace TravelExperts.Forms
             var product = GetProductByIndex(SelectedProductIndex);
 
             var supplier = (from PS
-                    in DataContext.Products_Suppliers
-                            where PS.ProductId == product.ProductId && PS.SupplierId == int.Parse(dataGridView_Suppliers.Rows[row].Cells[0].Value.ToString())
+                            in DataContext.Products_Suppliers
+                            where PS.ProductId == product.ProductId 
+                                && PS.SupplierId == int.Parse(dataGridView_Suppliers.Rows[row].Cells[0].Value.ToString())
                             select PS).First();
 
             var bookings = Util.Get(DataContext.BookingDetails.ToArray(), supplier);
@@ -257,6 +252,9 @@ namespace TravelExperts.Forms
             UpdateInterface(query.First().ProductId);
         }
 
+        /*
+         * SELECT PRODUCT
+         */
         private void dataGridView_Products_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // If theyre clicking actual data rows, rather than sorting buttons

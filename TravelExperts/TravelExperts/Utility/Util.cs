@@ -27,6 +27,19 @@ namespace TravelExperts.Utility
             return query.First();
         }
 
+        public static Supplier[] Get(Supplier[] list, Products_Supplier[] list2, int id)
+        {
+            var query = from Supplier
+                            in list
+                        join Product_Supplier
+                            in list2
+                            on id equals Product_Supplier.ProductId
+                        where Supplier.SupplierId == Product_Supplier.SupplierId
+                        select Supplier;
+
+            return query.ToArray();
+        }
+
         public static Products_Supplier[] Get(Products_Supplier[] list, int id)
         {
             var query = from Products_Supplier
