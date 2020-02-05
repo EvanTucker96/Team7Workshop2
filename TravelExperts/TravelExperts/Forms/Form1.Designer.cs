@@ -41,6 +41,8 @@
             // 
             this.button_Products.Location = new System.Drawing.Point(558, 314);
             this.button_Products.Margin = new System.Windows.Forms.Padding(4);
+            this.button_Products.Location = new System.Drawing.Point(576, 165);
+            this.button_Products.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_Products.Name = "button_Products";
             this.button_Products.Size = new System.Drawing.Size(168, 66);
             this.button_Products.TabIndex = 0;
@@ -111,6 +113,8 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button_Products);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.Controls.Add(this.button_Products);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
