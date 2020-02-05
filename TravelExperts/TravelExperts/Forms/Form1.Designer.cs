@@ -35,14 +35,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
+            this.btnPackages = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button_Products
             // 
-            this.button_Products.Location = new System.Drawing.Point(558, 314);
+            this.button_Products.Location = new System.Drawing.Point(487, 170);
             this.button_Products.Margin = new System.Windows.Forms.Padding(4);
-            this.button_Products.Location = new System.Drawing.Point(576, 165);
-            this.button_Products.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_Products.Name = "button_Products";
             this.button_Products.Size = new System.Drawing.Size(168, 66);
             this.button_Products.TabIndex = 0;
@@ -100,11 +99,23 @@
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
             // 
+            // btnPackages
+            // 
+            this.btnPackages.Location = new System.Drawing.Point(487, 295);
+            this.btnPackages.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPackages.Name = "btnPackages";
+            this.btnPackages.Size = new System.Drawing.Size(168, 66);
+            this.btnPackages.TabIndex = 7;
+            this.btnPackages.Text = "Packages";
+            this.btnPackages.UseVisualStyleBackColor = true;
+            this.btnPackages.Click += new System.EventHandler(this.btnPackages_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.btnPackages);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label2);
@@ -113,8 +124,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button_Products);
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.Controls.Add(this.button_Products);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -131,6 +140,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Button btnPackages;
     }
 }
 
