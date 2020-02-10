@@ -35,12 +35,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.button_Packages = new System.Windows.Forms.Button();
+
+            this.btnPackages = new System.Windows.Forms.Button();
+            2d28bce48aa8a37bdda7228314bca041501fad69
             this.SuspendLayout();
             // 
             // button_Products
             // 
-            this.button_Products.Location = new System.Drawing.Point(576, 165);
+
+            this.button_Products.Location = new System.Drawing.Point(487, 170);
+            2d28bce48aa8a37bdda7228314bca041501fad69
             this.button_Products.Margin = new System.Windows.Forms.Padding(4);
             this.button_Products.Name = "button_Products";
             this.button_Products.Size = new System.Drawing.Size(168, 66);
@@ -92,30 +96,35 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(170, 134);
+            this.btnRegister.Location = new System.Drawing.Point(170, 140);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(89, 38);
             this.btnRegister.TabIndex = 6;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
             // 
-            // button_Packages
+
+            // btnPackages
             // 
-            this.button_Packages.Location = new System.Drawing.Point(400, 165);
-            this.button_Packages.Margin = new System.Windows.Forms.Padding(4);
-            this.button_Packages.Name = "button_Packages";
-            this.button_Packages.Size = new System.Drawing.Size(168, 66);
-            this.button_Packages.TabIndex = 7;
-            this.button_Packages.Text = "Packages";
-            this.button_Packages.UseVisualStyleBackColor = true;
-            this.button_Packages.Click += new System.EventHandler(this.button_Packages_Click_1);
+            this.btnPackages.Location = new System.Drawing.Point(487, 295);
+            this.btnPackages.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPackages.Name = "btnPackages";
+            this.btnPackages.Size = new System.Drawing.Size(168, 66);
+            this.btnPackages.TabIndex = 7;
+            this.btnPackages.Text = "Packages";
+            this.btnPackages.UseVisualStyleBackColor = true;
+            this.btnPackages.Click += new System.EventHandler(this.btnPackages_Click);
+            2d28bce48aa8a37bdda7228314bca041501fad69
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
-            this.Controls.Add(this.button_Packages);
+
+
+            this.Controls.Add(this.btnPackages);
+            2d28bce48aa8a37bdda7228314bca041501fad69
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label2);
@@ -140,7 +149,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.Button btnRegister;
-        private System.Windows.Forms.Button button_Packages;
+
+        private System.Windows.Forms.Button btnPackages;
+        2d28bce48aa8a37bdda7228314bca041501fad69
     }
 }
 

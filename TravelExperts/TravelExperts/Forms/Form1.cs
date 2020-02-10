@@ -28,7 +28,7 @@ namespace TravelExperts
             form.Show();
         }
 
-        private void button_Packages_Click(object sender, EventArgs e)
+        private void btnPackages_Click(object sender, EventArgs e)
         {
             Packages form = new Packages(DataContext);
             form.Show();
