@@ -45,13 +45,13 @@
             this.button_Previous = new System.Windows.Forms.Button();
             this.button_Next = new System.Windows.Forms.Button();
             this.button_Last = new System.Windows.Forms.Button();
-            this.button_createPackage = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label_TotalPackages = new System.Windows.Forms.Label();
             this.label_Unsaved = new System.Windows.Forms.Label();
+            this.label_TotalPackages = new System.Windows.Forms.Label();
             this.button_Delete = new System.Windows.Forms.Button();
             this.button_Save = new System.Windows.Forms.Button();
+            this.button_New = new System.Windows.Forms.Button();
             this.gbPackage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackages)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -88,6 +88,7 @@
             this.textBox_PackageName.Name = "textBox_PackageName";
             this.textBox_PackageName.Size = new System.Drawing.Size(197, 22);
             this.textBox_PackageName.TabIndex = 7;
+            this.textBox_PackageName.TextChanged += new System.EventHandler(this.textBox_PackageName_TextChanged);
             // 
             // textBox_PackageId
             // 
@@ -110,6 +111,8 @@
             // 
             // dgvPackages
             // 
+            this.dgvPackages.AllowUserToAddRows = false;
+            this.dgvPackages.AllowUserToDeleteRows = false;
             this.dgvPackages.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPackages.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PackageId,
@@ -121,10 +124,12 @@
             this.PkgAgencyCommission});
             this.dgvPackages.Location = new System.Drawing.Point(8, 153);
             this.dgvPackages.Name = "dgvPackages";
+            this.dgvPackages.ReadOnly = true;
             this.dgvPackages.RowHeadersWidth = 51;
             this.dgvPackages.RowTemplate.Height = 24;
             this.dgvPackages.Size = new System.Drawing.Size(721, 290);
             this.dgvPackages.TabIndex = 1;
+            this.dgvPackages.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPackages_CellClick);
             // 
             // PackageId
             // 
@@ -185,6 +190,7 @@
             this.button_First.TabIndex = 15;
             this.button_First.Text = "<<";
             this.button_First.UseVisualStyleBackColor = true;
+            this.button_First.Click += new System.EventHandler(this.button_First_Click);
             // 
             // button_Previous
             // 
@@ -195,6 +201,7 @@
             this.button_Previous.TabIndex = 14;
             this.button_Previous.Text = "previous";
             this.button_Previous.UseVisualStyleBackColor = true;
+            this.button_Previous.Click += new System.EventHandler(this.button_Previous_Click);
             // 
             // button_Next
             // 
@@ -205,6 +212,7 @@
             this.button_Next.TabIndex = 13;
             this.button_Next.Text = "next";
             this.button_Next.UseVisualStyleBackColor = true;
+            this.button_Next.Click += new System.EventHandler(this.button_Next_Click);
             // 
             // button_Last
             // 
@@ -215,16 +223,7 @@
             this.button_Last.TabIndex = 12;
             this.button_Last.Text = ">>";
             this.button_Last.UseVisualStyleBackColor = true;
-            // 
-            // button_createPackage
-            // 
-            this.button_createPackage.Location = new System.Drawing.Point(552, 450);
-            this.button_createPackage.Margin = new System.Windows.Forms.Padding(4);
-            this.button_createPackage.Name = "button_createPackage";
-            this.button_createPackage.Size = new System.Drawing.Size(177, 28);
-            this.button_createPackage.TabIndex = 16;
-            this.button_createPackage.Text = "Add Package";
-            this.button_createPackage.UseVisualStyleBackColor = true;
+            this.button_Last.Click += new System.EventHandler(this.button_Last_Click);
             // 
             // label2
             // 
@@ -249,16 +248,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Summary";
             // 
-            // label_TotalPackages
-            // 
-            this.label_TotalPackages.AutoSize = true;
-            this.label_TotalPackages.Location = new System.Drawing.Point(8, 20);
-            this.label_TotalPackages.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_TotalPackages.Name = "label_TotalPackages";
-            this.label_TotalPackages.Size = new System.Drawing.Size(138, 21);
-            this.label_TotalPackages.TabIndex = 4;
-            this.label_TotalPackages.Text = "Total Packages:";
-            // 
             // label_Unsaved
             // 
             this.label_Unsaved.AutoSize = true;
@@ -271,6 +260,16 @@
             this.label_Unsaved.Text = "Unsaved **";
             this.label_Unsaved.Visible = false;
             // 
+            // label_TotalPackages
+            // 
+            this.label_TotalPackages.AutoSize = true;
+            this.label_TotalPackages.Location = new System.Drawing.Point(8, 20);
+            this.label_TotalPackages.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_TotalPackages.Name = "label_TotalPackages";
+            this.label_TotalPackages.Size = new System.Drawing.Size(110, 17);
+            this.label_TotalPackages.TabIndex = 4;
+            this.label_TotalPackages.Text = "Total Packages:";
+            // 
             // button_Delete
             // 
             this.button_Delete.Location = new System.Drawing.Point(437, 82);
@@ -280,6 +279,7 @@
             this.button_Delete.TabIndex = 20;
             this.button_Delete.Text = "delete";
             this.button_Delete.UseVisualStyleBackColor = true;
+            this.button_Delete.Click += new System.EventHandler(this.button_Delete_Click);
             // 
             // button_Save
             // 
@@ -290,17 +290,29 @@
             this.button_Save.TabIndex = 19;
             this.button_Save.Text = "save";
             this.button_Save.UseVisualStyleBackColor = true;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
+            // 
+            // button_New
+            // 
+            this.button_New.Location = new System.Drawing.Point(437, 10);
+            this.button_New.Margin = new System.Windows.Forms.Padding(4);
+            this.button_New.Name = "button_New";
+            this.button_New.Size = new System.Drawing.Size(83, 28);
+            this.button_New.TabIndex = 21;
+            this.button_New.Text = "new";
+            this.button_New.UseVisualStyleBackColor = true;
+            this.button_New.Click += new System.EventHandler(this.button_New_Click);
             // 
             // Packages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 486);
+            this.Controls.Add(this.button_New);
             this.Controls.Add(this.button_Delete);
             this.Controls.Add(this.button_Save);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button_createPackage);
             this.Controls.Add(this.button_First);
             this.Controls.Add(this.button_Previous);
             this.Controls.Add(this.button_Next);
@@ -309,6 +321,7 @@
             this.Controls.Add(this.gbPackage);
             this.Name = "Packages";
             this.Text = "Packages";
+            this.Load += new System.EventHandler(this.Packages_Load);
             this.gbPackage.ResumeLayout(false);
             this.gbPackage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackages)).EndInit();
@@ -331,7 +344,6 @@
         private System.Windows.Forms.Button button_Previous;
         private System.Windows.Forms.Button button_Next;
         private System.Windows.Forms.Button button_Last;
-        private System.Windows.Forms.Button button_createPackage;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn PackageId;
         private System.Windows.Forms.DataGridViewTextBoxColumn PkgName;
@@ -345,5 +357,6 @@
         private System.Windows.Forms.Label label_Unsaved;
         private System.Windows.Forms.Button button_Delete;
         private System.Windows.Forms.Button button_Save;
+        private System.Windows.Forms.Button button_New;
     }
 }

@@ -33,5 +33,11 @@ namespace TravelExperts
             Packages form = new Packages(DataContext);
             form.Show();
         }
+
+        private void button_Packages_Click_1(object sender, EventArgs e)
+        {
+            Packages form = new Packages(DataContext);
+            form.Show();
+        }
     }
 }

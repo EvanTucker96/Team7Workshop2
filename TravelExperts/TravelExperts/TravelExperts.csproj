@@ -67,6 +67,12 @@
     <Compile Include="Forms\AddSupplier.Designer.cs">
       <DependentUpon>AddSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EditPackages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditPackages.Designer.cs">
+      <DependentUpon>EditPackages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EditSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +106,9 @@
     </None>
     <EmbeddedResource Include="Forms\AddSupplier.resx">
       <DependentUpon>AddSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditPackages.resx">
+      <DependentUpon>EditPackages.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditSupplier.resx">
       <DependentUpon>EditSupplier.cs</DependentUpon>
