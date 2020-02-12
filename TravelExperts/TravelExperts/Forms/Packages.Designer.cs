@@ -52,6 +52,7 @@
             this.button_Delete = new System.Windows.Forms.Button();
             this.button_Save = new System.Windows.Forms.Button();
             this.button_New = new System.Windows.Forms.Button();
+            this.btn_AddProducts = new System.Windows.Forms.Button();
             this.gbPackage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPackages)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -144,6 +145,7 @@
             this.PkgName.HeaderText = "Package Name";
             this.PkgName.MinimumWidth = 6;
             this.PkgName.Name = "PkgName";
+            this.PkgName.ReadOnly = true;
             this.PkgName.Width = 125;
             // 
             // PkgStartDate
@@ -151,6 +153,7 @@
             this.PkgStartDate.HeaderText = "Start Date";
             this.PkgStartDate.MinimumWidth = 6;
             this.PkgStartDate.Name = "PkgStartDate";
+            this.PkgStartDate.ReadOnly = true;
             this.PkgStartDate.Width = 125;
             // 
             // PkgEndDate
@@ -158,6 +161,7 @@
             this.PkgEndDate.HeaderText = "End Date";
             this.PkgEndDate.MinimumWidth = 6;
             this.PkgEndDate.Name = "PkgEndDate";
+            this.PkgEndDate.ReadOnly = true;
             this.PkgEndDate.Width = 125;
             // 
             // PkgDesc
@@ -165,6 +169,7 @@
             this.PkgDesc.HeaderText = "Description";
             this.PkgDesc.MinimumWidth = 6;
             this.PkgDesc.Name = "PkgDesc";
+            this.PkgDesc.ReadOnly = true;
             this.PkgDesc.Width = 125;
             // 
             // PkgBasePrice
@@ -172,6 +177,7 @@
             this.PkgBasePrice.HeaderText = "Base Price";
             this.PkgBasePrice.MinimumWidth = 6;
             this.PkgBasePrice.Name = "PkgBasePrice";
+            this.PkgBasePrice.ReadOnly = true;
             this.PkgBasePrice.Width = 125;
             // 
             // PkgAgencyCommission
@@ -179,6 +185,7 @@
             this.PkgAgencyCommission.HeaderText = "Agency Commision";
             this.PkgAgencyCommission.MinimumWidth = 6;
             this.PkgAgencyCommission.Name = "PkgAgencyCommission";
+            this.PkgAgencyCommission.ReadOnly = true;
             this.PkgAgencyCommission.Width = 125;
             // 
             // button_First
@@ -303,11 +310,21 @@
             this.button_New.UseVisualStyleBackColor = true;
             this.button_New.Click += new System.EventHandler(this.button_New_Click);
             // 
+            // btn_AddProducts
+            // 
+            this.btn_AddProducts.Location = new System.Drawing.Point(609, 450);
+            this.btn_AddProducts.Name = "btn_AddProducts";
+            this.btn_AddProducts.Size = new System.Drawing.Size(120, 28);
+            this.btn_AddProducts.TabIndex = 22;
+            this.btn_AddProducts.Text = "Add Products";
+            this.btn_AddProducts.UseVisualStyleBackColor = true;
+            // 
             // Packages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 486);
+            this.Controls.Add(this.btn_AddProducts);
             this.Controls.Add(this.button_New);
             this.Controls.Add(this.button_Delete);
             this.Controls.Add(this.button_Save);
@@ -358,5 +375,6 @@
         private System.Windows.Forms.Button button_Delete;
         private System.Windows.Forms.Button button_Save;
         private System.Windows.Forms.Button button_New;
+        private System.Windows.Forms.Button btn_AddProducts;
     }
 }

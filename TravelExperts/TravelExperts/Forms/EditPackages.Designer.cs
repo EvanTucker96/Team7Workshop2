@@ -44,6 +44,7 @@
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.lbl_Id = new System.Windows.Forms.Label();
+            this.btn_AddProducts = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -124,7 +125,6 @@
             this.tb_BasePrice.Name = "tb_BasePrice";
             this.tb_BasePrice.Size = new System.Drawing.Size(397, 22);
             this.tb_BasePrice.TabIndex = 9;
-            this.tb_BasePrice.TextChanged += new System.EventHandler(this.tb_BasePrice_TextChanged);
             // 
             // label5
             // 
@@ -142,7 +142,6 @@
             this.tb_commission.Name = "tb_commission";
             this.tb_commission.Size = new System.Drawing.Size(397, 22);
             this.tb_commission.TabIndex = 11;
-            this.tb_commission.TextChanged += new System.EventHandler(this.tb_commission_TextChanged);
             // 
             // label6
             // 
@@ -180,7 +179,7 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(8, 9);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(126, 25);
+            this.label7.Size = new System.Drawing.Size(101, 20);
             this.label7.TabIndex = 14;
             this.label7.Text = "Package Id: ";
             // 
@@ -189,14 +188,25 @@
             this.lbl_Id.AutoSize = true;
             this.lbl_Id.Location = new System.Drawing.Point(109, 12);
             this.lbl_Id.Name = "lbl_Id";
-            this.lbl_Id.Size = new System.Drawing.Size(0, 21);
+            this.lbl_Id.Size = new System.Drawing.Size(0, 17);
             this.lbl_Id.TabIndex = 15;
+            // 
+            // btn_AddProducts
+            // 
+            this.btn_AddProducts.Location = new System.Drawing.Point(105, 345);
+            this.btn_AddProducts.Name = "btn_AddProducts";
+            this.btn_AddProducts.Size = new System.Drawing.Size(122, 35);
+            this.btn_AddProducts.TabIndex = 23;
+            this.btn_AddProducts.Text = "Add Products";
+            this.btn_AddProducts.UseVisualStyleBackColor = true;
+            this.btn_AddProducts.Click += new System.EventHandler(this.btn_AddProducts_Click);
             // 
             // EditPackages
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(427, 391);
+            this.Controls.Add(this.btn_AddProducts);
             this.Controls.Add(this.lbl_Id);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btn_Cancel);
@@ -240,5 +250,6 @@
         private System.Windows.Forms.Button btn_Cancel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label lbl_Id;
+        private System.Windows.Forms.Button btn_AddProducts;
     }
 }
