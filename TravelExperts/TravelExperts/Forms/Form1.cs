@@ -50,7 +50,9 @@ namespace TravelExperts
                 lblError.Text = "User already exists";
             }           
             lblLogin.Text = "";
-            lblSuccess.Text = "Registration successful!";
+            if(lblError.Text != "User already exists")
+                lblSuccess.Text = "Registration successful!";
+            lblError.Text = "";
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
