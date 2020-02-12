@@ -21,8 +21,6 @@ namespace TravelExperts.Forms
         public Package Package { get; set; } 
         private Packages Packages { get; }
        
-        // Ask for data context for entity framework, and package you'd like
-        // to edit for this form.
         public EditPackages(TravelExpertsDataContext dataContext, Package package, Packages packages)
         {
             InitializeComponent();
@@ -134,7 +132,7 @@ namespace TravelExperts.Forms
 
         private void btn_AddProducts_Click(object sender, EventArgs e)
         {
-            
+            new AddProductsToPackages(DataContext, Package).Show();
         }
     }
 }

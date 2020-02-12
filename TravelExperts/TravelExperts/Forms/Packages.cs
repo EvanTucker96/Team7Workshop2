@@ -58,11 +58,6 @@ namespace TravelExperts
 
         private void AddPackageGridItem(Package packages)
         {
-
-            // does this package HAVE a start date, end date, desc, baseprice, and agency commission? Maybe ones null.
-
-
-
             dgvPackages.Rows.Add(new string[]
             {
                 packages.PackageId.ToString(),
@@ -74,10 +69,6 @@ namespace TravelExperts
                 packages.PkgAgencyCommission != null ? packages.PkgAgencyCommission.ToString() : ""
             });
         }
-        //is it becuase i only set the name? i might have to make a whole new form for adding packages.
-
-        // ye, not the error though for some reason
-
         private void FillGridBox(int PackageId)
         {
             var packages = DataContext.Packages.ToList();
@@ -145,38 +136,23 @@ namespace TravelExperts
         private void DeletePackage()
         {
             var package = GetPackageByIndex(SelectedPackageIndex);
-            var suppliers = Util.Get(DataContext.Products_Suppliers.ToArray(), package.PackageId);
-            var pkgSuppliers = (from PPS
-                           in DataContext.Packages_Products_Suppliers
-                                where PPS.PackageId == package.PackageId
-                                select PPS);
+            var pkgProductSuppliers = package.Packages_Products_Suppliers.ToList();
 
-            foreach (var packageProductSupplier in suppliers.ToList()) {
-                var query = from ps in DataContext.Products_Suppliers where ps.ProductSupplierId == packageProductSupplier.ProductSupplierId select ps;
-
-                DataContext.Products_Suppliers.DeleteAllOnSubmit(query);
-            }
-
-            var bookings = Util.Get(DataContext.BookingDetails.ToArray(), suppliers);
-
+            DataContext.Packages_Products_Suppliers.DeleteAllOnSubmit(pkgProductSuppliers);
             DataContext.Packages.DeleteOnSubmit(package);
-            DataContext.Products_Suppliers.DeleteAllOnSubmit(suppliers);
-            DataContext.BookingDetails.DeleteAllOnSubmit(bookings);
-            DataContext.Packages_Products_Suppliers.DeleteAllOnSubmit(pkgSuppliers);
-            
+
             DataContext.SubmitChanges();
 
-
-                UpdateInterface();
+            UpdateInterface();
         }
 
 
 
-        private void EditPackages(int row)
+        private void EditPackages(int packageId)
         {
             var package = (from packages
                                    in DataContext.Packages
-                           where packages.PackageId == int.Parse(dgvPackages.Rows[row].Cells[0].Value.ToString())
+                           where packages.PackageId == packageId
                            select packages).First();
 
             EditPackages form = new EditPackages(DataContext, package, this);
@@ -196,8 +172,9 @@ namespace TravelExperts
 
         private void dgvPackages_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
             if (e.RowIndex >= 0)
-                EditPackages(e.RowIndex);
+                EditPackages(int.Parse(dgvPackages.Rows[e.RowIndex].Cells[0].Value.ToString()));
         }
 
 
@@ -264,10 +241,18 @@ namespace TravelExperts
 
         private void button_Delete_Click(object sender, EventArgs e)
         {
+
+
             if (textBox_PackageId.Text == "")
                 UpdateInterface();
             else
-                DeletePackage();
+            {
+                var mb = MessageBox.Show("Are you sure you want  to delete the package?", "Confirmation", MessageBoxButtons.YesNoCancel);
+                if (mb == DialogResult.Yes)
+                    DeletePackage();
+                
+            }
+               
         }
 
 
