@@ -31,15 +31,17 @@ namespace TravelExperts.Forms
             Packages = packages;
         }
 
+
+
         private void EditPackages_Load(object sender, EventArgs e)
         {
             lbl_Id.Text = Package.PackageId.ToString();
             tb_PkgName.Text = Package.PkgName;
             tb_Desc.Text = Package.PkgDesc;
-            dtp_Start.Value = Convert.ToDateTime(Package.PkgStartDate);
-            dtp_End.Value = Convert.ToDateTime(Package.PkgEndDate);
-            tb_BasePrice.Text = Package.PkgBasePrice.ToString("c");
-            tb_commission.Text = Package.PkgAgencyCommission.ToString();
+            dtp_Start.MinDate = Convert.ToDateTime(Package.PkgStartDate);
+            dtp_End.MinDate = Convert.ToDateTime(Package.PkgEndDate);
+            tb_BasePrice.Text = Package.PkgBasePrice.ToString();
+            tb_commission.Text = Package.PkgAgencyCommission.ToString() ;
         }
 
         private void tb_PkgName_TextChanged(object sender, EventArgs e)
@@ -63,6 +65,15 @@ namespace TravelExperts.Forms
             else
             {
                 MessageBox.Show("Description is too long!", "String Format Exception");
+                return;
+            }
+            if (ValidatePrice() == true)
+            {
+                Console.WriteLine("Prices Validated");
+            }
+            else
+            {
+                MessageBox.Show("Commission cannot be higher than the price!", "Error");
                 return;
             }
              
@@ -110,39 +121,20 @@ namespace TravelExperts.Forms
                 btn_Submit.Enabled = true;
         }
 
-        private void tb_BasePrice_TextChanged(object sender, EventArgs e)
+        public bool ValidatePrice()
         {
             var baseprice = decimal.Parse(tb_BasePrice.Text);
-            var commision = decimal.Parse(tb_commission.Text);
+            var commission = decimal.Parse(tb_commission.Text);
 
-            if (baseprice <= commision)
-                btn_Submit.Enabled = false;
+            if (baseprice <= commission)
+               return false;
             else
-                btn_Submit.Enabled = true;
-
+               return true;
         }
 
-        private void tb_commission_TextChanged(object sender, EventArgs e)
+        private void btn_AddProducts_Click(object sender, EventArgs e)
         {
-            var baseprice = decimal.Parse(tb_BasePrice.Text);
-            var commision = decimal.Parse(tb_commission.Text);
-
-            if (baseprice <= commision)
-                btn_Submit.Enabled = false;
-            else
-                btn_Submit.Enabled = true;
+            
         }
-
-        // just grab all the Products_Supplier objects, which will have the products attached to em
-
-        //private void something()
-        //{
-        //    var productsSuppliers = DataContext.Products_Suppliers;
-
-        //    foreach (var ps in productsSuppliers)
-        //    {
-        //        ps.Product; <---- each products_supplier has referrence to the product it contains the ID of, so.
-        //    }
-        //}
     }
 }

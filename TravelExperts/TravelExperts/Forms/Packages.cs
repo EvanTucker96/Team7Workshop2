@@ -146,16 +146,31 @@ namespace TravelExperts
         {
             var package = GetPackageByIndex(SelectedPackageIndex);
             var suppliers = Util.Get(DataContext.Products_Suppliers.ToArray(), package.PackageId);
+            var pkgSuppliers = (from PPS
+                           in DataContext.Packages_Products_Suppliers
+                                where PPS.PackageId == package.PackageId
+                                select PPS);
+
+            foreach (var packageProductSupplier in suppliers.ToList()) {
+                var query = from ps in DataContext.Products_Suppliers where ps.ProductSupplierId == packageProductSupplier.ProductSupplierId select ps;
+
+                DataContext.Products_Suppliers.DeleteAllOnSubmit(query);
+            }
+
             var bookings = Util.Get(DataContext.BookingDetails.ToArray(), suppliers);
-            var pkgSuppliers = Util.Get(DataContext.Packages_Products_Suppliers.ToArray(), suppliers);
 
-            DataContext.Packages_Products_Suppliers.DeleteAllOnSubmit(pkgSuppliers);
             DataContext.Packages.DeleteOnSubmit(package);
-
+            DataContext.Products_Suppliers.DeleteAllOnSubmit(suppliers);
+            DataContext.BookingDetails.DeleteAllOnSubmit(bookings);
+            DataContext.Packages_Products_Suppliers.DeleteAllOnSubmit(pkgSuppliers);
+            
             DataContext.SubmitChanges();
 
-            UpdateInterface();
+
+                UpdateInterface();
         }
+
+
 
         private void EditPackages(int row)
         {
@@ -167,6 +182,8 @@ namespace TravelExperts
             EditPackages form = new EditPackages(DataContext, package, this);
             form.Show();
         }
+
+
 
         private void Packages_Load(object sender, EventArgs e)
         {
@@ -182,6 +199,8 @@ namespace TravelExperts
             if (e.RowIndex >= 0)
                 EditPackages(e.RowIndex);
         }
+
+
 
         private void textBox_PackageName_TextChanged(object sender, EventArgs e)
         {
@@ -250,5 +269,7 @@ namespace TravelExperts
             else
                 DeletePackage();
         }
+
+
     }
 }
