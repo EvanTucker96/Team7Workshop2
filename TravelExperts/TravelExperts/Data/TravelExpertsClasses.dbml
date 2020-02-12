@@ -63,4 +63,10 @@
       <Association Name="Products_Supplier_BookingDetail" Member="Products_Supplier" ThisKey="ProductSupplierId" OtherKey="ProductSupplierId" Type="Products_Supplier" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExperts.Forms;
 using TravelExperts.Data;
+using TravelExperts.Utility;
 
 namespace TravelExperts
 {
@@ -34,10 +35,86 @@ namespace TravelExperts
             form.Show();
         }
 
-        private void button_Packages_Click_1(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
-            Packages form = new Packages(DataContext);
-            form.Show();
+            User newUser = new User();
+            newUser.Username = txtUsername.Text;
+            newUser.Password = Util.Encrypt(txtPassword.Text);
+            DataContext.Users.InsertOnSubmit(newUser);
+            try
+            {
+                DataContext.SubmitChanges();
+            }
+            catch
+            {
+                lblError.Text = "User already exists";
+            }           
+            lblLogin.Text = "";
+            lblSuccess.Text = "Registration successful!";
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            User user;
+
+            string username = txtUsername.Text;
+            string password = Util.Encrypt(txtPassword.Text);
+
+            var query = from u
+                        in DataContext.Users
+                        where u.Username == username && u.Password == password
+                        select u;
+
+            if (query != null && query.FirstOrDefault() != null)
+            {
+                user = query.First();
+                btnPackages.Enabled = true;
+                button_Products.Enabled = true;
+                btnLogout.Enabled = true;
+                btnLogout.Visible = true;
+                lblLogin.Text = "Welcome, " + user.Username + "!";
+                lblError.Text = "";
+                lblSuccess.Text = "";
+                btnLogin.Enabled = false;
+                btnLogin.Visible = false;
+                btnRegister.Enabled = false;
+                btnRegister.Visible = false;
+                lblUsername.Visible = false;
+                lblPassword.Visible = false;
+                txtUsername.Enabled = false;
+                txtUsername.Visible = false;
+                txtPassword.Visible = false;
+                txtPassword.Enabled = false;
+            }
+            else
+            {
+                lblSuccess.Text = "";
+                lblError.Text = "Invalid credentials";
+                txtUsername.Text = "";
+                txtPassword.Text = "";
+                return;
+            }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            btnPackages.Enabled = false;
+            button_Products.Enabled = false;
+            btnLogout.Enabled = false;
+            btnLogout.Visible = false;
+            txtUsername.Text = "";
+            txtPassword.Text = "";
+            lblLogin.Text = "";
+            btnLogin.Enabled = true;
+            btnLogin.Visible = true;
+            btnRegister.Enabled = true;
+            btnRegister.Visible = true;
+            lblUsername.Visible = true;
+            lblPassword.Visible = true;
+            txtUsername.Enabled = true;
+            txtUsername.Visible = true;
+            txtPassword.Visible = true;
+            txtPassword.Enabled = true;
         }
     }
 }
