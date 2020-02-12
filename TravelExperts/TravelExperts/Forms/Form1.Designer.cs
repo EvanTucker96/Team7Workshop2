@@ -37,14 +37,12 @@
             this.btnRegister = new System.Windows.Forms.Button();
 
             this.btnPackages = new System.Windows.Forms.Button();
-            2d28bce48aa8a37bdda7228314bca041501fad69
             this.SuspendLayout();
             // 
             // button_Products
             // 
 
             this.button_Products.Location = new System.Drawing.Point(487, 170);
-            2d28bce48aa8a37bdda7228314bca041501fad69
             this.button_Products.Margin = new System.Windows.Forms.Padding(4);
             this.button_Products.Name = "button_Products";
             this.button_Products.Size = new System.Drawing.Size(168, 66);
@@ -114,7 +112,6 @@
             this.btnPackages.Text = "Packages";
             this.btnPackages.UseVisualStyleBackColor = true;
             this.btnPackages.Click += new System.EventHandler(this.btnPackages_Click);
-            2d28bce48aa8a37bdda7228314bca041501fad69
             // 
             // Form1
             // 
@@ -124,7 +121,6 @@
 
 
             this.Controls.Add(this.btnPackages);
-            2d28bce48aa8a37bdda7228314bca041501fad69
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.label2);
@@ -151,7 +147,6 @@
         private System.Windows.Forms.Button btnRegister;
 
         private System.Windows.Forms.Button btnPackages;
-        2d28bce48aa8a37bdda7228314bca041501fad69
     }
 }
 
