@@ -156,22 +156,13 @@ namespace TravelExperts.Forms
             // Old product to be deleted
             var product = GetProductByIndex(SelectedProductIndex);
 
-            // New product to be entered
-            var temp = new Product
-            {
-                ProdName = textBox_Name.Text,
-                Products_Suppliers = product.Products_Suppliers
-            };
-
-            // Remove and insert new product entry
-            DataContext.Products.DeleteOnSubmit(product);
-            DataContext.Products.InsertOnSubmit(temp);
+            product.ProdName = textBox_Name.Text;
 
             // Save changes
             DataContext.SubmitChanges();
 
             // Update interface
-            UpdateInterface(temp.ProductId);
+            UpdateInterface(product.ProductId);
         }
 
         private void CreateProduct()
