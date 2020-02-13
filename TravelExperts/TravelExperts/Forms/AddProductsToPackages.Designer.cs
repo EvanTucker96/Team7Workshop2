@@ -32,7 +32,8 @@
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductSupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_add = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_Back = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_PackageProducts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,13 +44,14 @@
             this.Id,
             this.name,
             this.ProductSupplierId});
-            this.dgv_PackageProducts.Location = new System.Drawing.Point(12, 47);
+            this.dgv_PackageProducts.Location = new System.Drawing.Point(11, 11);
+            this.dgv_PackageProducts.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_PackageProducts.Name = "dgv_PackageProducts";
             this.dgv_PackageProducts.RowHeadersWidth = 51;
             this.dgv_PackageProducts.RowTemplate.Height = 24;
-            this.dgv_PackageProducts.Size = new System.Drawing.Size(549, 320);
+            this.dgv_PackageProducts.Size = new System.Drawing.Size(436, 282);
             this.dgv_PackageProducts.TabIndex = 0;
-            this.dgv_PackageProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_PackageProducts_CellContentClick);
+            this.dgv_PackageProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_PackageProducts_CellDoubleClick);
             // 
             // Id
             // 
@@ -75,27 +77,40 @@
             this.ProductSupplierId.ReadOnly = true;
             this.ProductSupplierId.Width = 125;
             // 
-            // btn_add
+            // label1
             // 
-            this.btn_add.Location = new System.Drawing.Point(12, 373);
-            this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(110, 40);
-            this.btn_add.TabIndex = 1;
-            this.btn_add.Text = "Add Product";
-            this.btn_add.UseVisualStyleBackColor = true;
-            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 295);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(207, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Double Click Product to Add";
+            // 
+            // btn_Back
+            // 
+            this.btn_Back.Location = new System.Drawing.Point(374, 298);
+            this.btn_Back.Name = "btn_Back";
+            this.btn_Back.Size = new System.Drawing.Size(72, 31);
+            this.btn_Back.TabIndex = 2;
+            this.btn_Back.Text = "Cancel";
+            this.btn_Back.UseVisualStyleBackColor = true;
+            this.btn_Back.Click += new System.EventHandler(this.btn_Back_Click);
             // 
             // AddProductsToPackages
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 420);
-            this.Controls.Add(this.btn_add);
+            this.ClientSize = new System.Drawing.Size(458, 341);
+            this.Controls.Add(this.btn_Back);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgv_PackageProducts);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddProductsToPackages";
             this.Text = "AddProductsToPackages";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_PackageProducts)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -105,6 +120,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductSupplierId;
-        private System.Windows.Forms.Button btn_add;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_Back;
     }
 }

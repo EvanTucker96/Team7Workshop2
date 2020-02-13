@@ -34,6 +34,7 @@ namespace TravelExperts.Forms
                 ProductSupplierId = productSupplier.ProductSupplierId,
                 PackageId = Package.PackageId
             });
+            DataContext.SubmitChanges();
         }
 
         private void PhillProductGridView()
@@ -63,14 +64,20 @@ namespace TravelExperts.Forms
             });
         }
 
-        private void dgv_PackageProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgv_PackageProducts_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            int selectedRow = Convert.ToInt32(dgv_PackageProducts.Rows[e.RowIndex].Cells[0].Value);
 
+            var productSupplier = (from ps in DataContext.Products_Suppliers where ps.ProductSupplierId == selectedRow select ps).FirstOrDefault();
+
+            var mb = MessageBox.Show("Add the product to the package?", "Confirmation", MessageBoxButtons.YesNoCancel);
+            if (mb == DialogResult.Yes)
+                AddProductToPackage(productSupplier);
         }
 
-        private void btn_add_Click(object sender, EventArgs e)
+        private void btn_Back_Click(object sender, EventArgs e)
         {
-            AddProductToPackage();
+            Close();
         }
     }
 }
