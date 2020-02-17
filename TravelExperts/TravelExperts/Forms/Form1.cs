@@ -40,19 +40,29 @@ namespace TravelExperts
             User newUser = new User();
             newUser.Username = txtUsername.Text;
             newUser.Password = Util.Encrypt(txtPassword.Text);
+
             DataContext.Users.InsertOnSubmit(newUser);
+            bool successful;
+
             try
             {
                 DataContext.SubmitChanges();
+                successful = true;
             }
             catch
             {
-                lblError.Text = "User already exists";
-            }           
-            lblLogin.Text = "";
-            if(lblError.Text != "User already exists")
+                successful = false;
+            }
+
+            if(successful == true)
+            {
                 lblSuccess.Text = "Registration successful!";
-            lblError.Text = "";
+            }
+
+            if(successful == false)
+            {
+                lblError.Text = "Registration failed";
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -67,7 +77,11 @@ namespace TravelExperts
                         where u.Username == username && u.Password == password
                         select u;
 
-            if (query != null && query.FirstOrDefault() != null)
+            if(txtUsername.Text == "" || txtPassword.Text == "")
+            {
+                lblError.Text = "Fill in all text fields";
+            }
+            else if (query != null && query.FirstOrDefault() != null)
             {
                 user = query.First();
                 btnPackages.Enabled = true;
