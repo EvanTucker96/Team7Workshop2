@@ -56,6 +56,7 @@ namespace TravelExperts
 
             if(successful == true)
             {
+                lblError.Text = "";
                 lblSuccess.Text = "Registration successful!";
             }
 
@@ -67,6 +68,7 @@ namespace TravelExperts
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            lblSuccess.Text = "";
             User user;
 
             string username = txtUsername.Text;
