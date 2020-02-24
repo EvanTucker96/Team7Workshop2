@@ -34,24 +34,24 @@
             this.ProductSupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_Back = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_PackageProducts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.dgv_PackageProducts)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv_PackageProducts
             // 
-            this.dgv_PackageProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_PackageProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Id,
-            this.name,
-            this.ProductSupplierId});
-            this.dgv_PackageProducts.Location = new System.Drawing.Point(11, 11);
+            this.dgv_PackageProducts.ColumnHeadersHeightSizeMode =
+                System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_PackageProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
+                {this.Id, this.name, this.ProductSupplierId});
+            this.dgv_PackageProducts.Location = new System.Drawing.Point(13, 13);
             this.dgv_PackageProducts.Margin = new System.Windows.Forms.Padding(2);
             this.dgv_PackageProducts.Name = "dgv_PackageProducts";
             this.dgv_PackageProducts.RowHeadersWidth = 51;
             this.dgv_PackageProducts.RowTemplate.Height = 24;
-            this.dgv_PackageProducts.Size = new System.Drawing.Size(436, 282);
+            this.dgv_PackageProducts.Size = new System.Drawing.Size(509, 325);
             this.dgv_PackageProducts.TabIndex = 0;
-            this.dgv_PackageProducts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_PackageProducts_CellDoubleClick);
+            this.dgv_PackageProducts.CellDoubleClick +=
+                new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_PackageProducts_CellDoubleClick);
             // 
             // Id
             // 
@@ -80,8 +80,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 295);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular,
+                System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label1.Location = new System.Drawing.Point(14, 340);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(207, 20);
             this.label1.TabIndex = 1;
@@ -89,9 +90,9 @@
             // 
             // btn_Back
             // 
-            this.btn_Back.Location = new System.Drawing.Point(374, 298);
+            this.btn_Back.Location = new System.Drawing.Point(436, 344);
             this.btn_Back.Name = "btn_Back";
-            this.btn_Back.Size = new System.Drawing.Size(72, 31);
+            this.btn_Back.Size = new System.Drawing.Size(84, 36);
             this.btn_Back.TabIndex = 2;
             this.btn_Back.Text = "Cancel";
             this.btn_Back.UseVisualStyleBackColor = true;
@@ -99,19 +100,18 @@
             // 
             // AddProductsToPackages
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 341);
+            this.ClientSize = new System.Drawing.Size(534, 393);
             this.Controls.Add(this.btn_Back);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgv_PackageProducts);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddProductsToPackages";
             this.Text = "AddProductsToPackages";
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_PackageProducts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.dgv_PackageProducts)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

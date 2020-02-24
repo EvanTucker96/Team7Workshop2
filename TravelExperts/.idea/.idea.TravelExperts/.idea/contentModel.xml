@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\nelso\.Rider2019.3\config\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\nelso\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\nelso\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_TravelExperts.-1357897896.00" t="ExcludeRecursive" />
+    <e p="D:\Repos\School\Team7Workshop2\TravelExperts" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="TravelExperts" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="ClassDiagram1.cd" t="Include" />
+        <e p="config" t="Include">
+          <e p="App.config" t="Include" />
+          <e p="packages.config" t="Include" />
+        </e>
+        <e p="Data" t="Include">
+          <e p="TravelExpertsClasses.dbml" t="Include" />
+          <e p="TravelExpertsClasses.dbml.layout" t="Include" />
+          <e p="TravelExpertsClasses.designer.cs" t="Include" />
+        </e>
+        <e p="Forms" t="Include">
+          <e p="AddProductsToPackages.cs" t="Include" />
+          <e p="AddProductsToPackages.Designer.cs" t="Include" />
+          <e p="AddProductsToPackages.resx" t="Include" />
+          <e p="AddSupplier.cs" t="Include" />
+          <e p="AddSupplier.Designer.cs" t="Include" />
+          <e p="AddSupplier.resx" t="Include" />
+          <e p="EditPackages.cs" t="Include" />
+          <e p="EditPackages.Designer.cs" t="Include" />
+          <e p="EditPackages.resx" t="Include" />
+          <e p="EditSupplier.cs" t="Include" />
+          <e p="EditSupplier.Designer.cs" t="Include" />
+          <e p="EditSupplier.resx" t="Include" />
+          <e p="Form1.cs" t="Include" />
+          <e p="Form1.Designer.cs" t="Include" />
+          <e p="Form1.resx" t="Include" />
+          <e p="Packages.cs" t="Include" />
+          <e p="Packages.Designer.cs" t="Include" />
+          <e p="Packages.resx" t="Include" />
+          <e p="Products.cs" t="Include" />
+          <e p="Products.Designer.cs" t="Include" />
+          <e p="Products.resx" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="DataSources" t="Include">
+            <e p="DataClasses1DataContext.datasource" t="Include" />
+          </e>
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+          <e p="Settings.Designer.cs" t="Include" />
+          <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="TravelExperts.csproj" t="IncludeRecursive" />
+        <e p="Utility" t="Include">
+          <e p="Util.cs" t="Include" />
+        </e>
+      </e>
+      <e p="TravelExperts.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

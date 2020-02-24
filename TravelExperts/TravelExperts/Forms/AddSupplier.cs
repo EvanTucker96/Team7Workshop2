@@ -16,7 +16,6 @@ namespace TravelExperts.Forms
     {
         private TravelExpertsDataContext DataContext { get; }
         private int SelectedProductIndex { get; }
-
         private Products Products { get; }
 
         public AddSupplier(TravelExpertsDataContext dataContext, Products products, int selectedProductIndex)
@@ -56,29 +55,31 @@ namespace TravelExperts.Forms
             suppliers.ForEach(supplier =>
             {
                 if (supplier.SupName.Contains(term))
-                    dataGridView_Suppliers.Rows.Add(new string[]
-                    {
-                        supplier.SupplierId.ToString(),
-                    supplier.SupName
-                    });
+                    dataGridView_Suppliers.Rows.Add(supplier.SupplierId.ToString(), supplier.SupName);
             });
 
             dataGridView_Suppliers.ClearSelection();
         }
 
-        private void AddSupplierToProduct(int index)
+        private void AddSupplierToProduct(int id)
         {
             var product = DataContext.Products.ToList()[SelectedProductIndex];
-            var supplier = DataContext.Suppliers.ToList()[index];
+            var supplier = DataContext.Suppliers.First(s => s.SupplierId == id);
 
             var productSupplier = new Products_Supplier
             {
                 ProductId = product.ProductId,
                 SupplierId = supplier.SupplierId,
             };
-            
-            DataContext.Products_Suppliers.InsertOnSubmit(productSupplier);
 
+            if (product.Products_Suppliers.Any(ps => ps.SupplierId == id))
+            {
+                MessageBox.Show(@"Supplier already exists on product.", @"Conflict Error");
+                return;
+            }
+
+            product.Products_Suppliers.Add(productSupplier);
+            DataContext.Products_Suppliers.InsertOnSubmit(productSupplier);
             DataContext.SubmitChanges();
 
             Products.UpdateInterface(product.ProductId);
@@ -97,8 +98,9 @@ namespace TravelExperts.Forms
 
         private void dataGridView_Suppliers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            var id = int.Parse((string) dataGridView_Suppliers.Rows[e.RowIndex].Cells[0].Value);
             if (e.RowIndex >= 0)
-                AddSupplierToProduct(e.RowIndex);
+                AddSupplierToProduct(id);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

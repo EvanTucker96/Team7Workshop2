@@ -14,10 +14,10 @@ namespace TravelExperts.Forms
 {
     public partial class EditSupplier : Form
     {
-        private TravelExpertsDataContext DataContext { get; set; }
-        private Supplier Supplier { get; set; }
-        private Products Products { get; set; }
-        private int SelectedProductId { get; set; }
+        private TravelExpertsDataContext DataContext { get; }
+        private Supplier Supplier { get; }
+        private Products Products { get; }
+        private int SelectedProductId { get; }
 
         public EditSupplier(TravelExpertsDataContext dataContext, Products products, int selectedProductId, Supplier supplier)
         {
@@ -36,11 +36,9 @@ namespace TravelExperts.Forms
 
         private void textBox_Name_TextChanged(object sender, EventArgs e)
         {
+            button_Save.Enabled = textBox_Name.Text != "";
             textBox_Name.Text = textBox_Name.Text.ToUpper();
-            if (textBox_Name.Text != Supplier.SupName)
-                label_Unsaved.Visible = true;
-            else
-                label_Unsaved.Visible = false;
+            label_Unsaved.Visible = textBox_Name.Text != Supplier.SupName;
         }
 
         private void button_Save_Click(object sender, EventArgs e)

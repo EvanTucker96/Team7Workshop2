@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using TravelExperts.Data;
@@ -23,6 +19,7 @@ namespace TravelExperts.Forms
             SelectedProductIndex = 0;
         }
 
+        // Getters
         private Product GetProduct(int productId)
         {
             return Util.Get(DataContext.Products.ToArray(), productId);
@@ -43,17 +40,27 @@ namespace TravelExperts.Forms
             return Util.Get(DataContext.Suppliers.ToArray(), DataContext.Products_Suppliers.ToArray(), productId);
         }
 
-        private void SetValueLabel(Label label, string value)
+        /// <summary>
+        /// set a text label to be formatted like:
+        /// title : value
+        /// </summary>
+        /// <param name="label">title</param>
+        /// <param name="value">value</param>
+        private static void SetValueLabel(Label label, string value)
         {
-            label.Text = label.Text.Split(':')[0] + ": " + value;
+            label.Text = label.Text.Split(':')[0] + @": " + value;
         }
 
+        /// <summary>
+        /// Fill textbox data with a product
+        /// </summary>
+        /// <param name="productId"></param>
         private void FillTextBoxes(int productId)
         {
             var product = GetProduct(productId);
             var index = GetProductIndex(productId);
             var totalProducts = DataContext.Products.Count().ToString();
-            var totalSuppliers = DataContext.Suppliers.Count().ToString(); ;
+            var totalSuppliers = DataContext.Suppliers.Count().ToString();
             var totalProductSuppliers = GetSuppliers(productId).Length.ToString();
 
             // Set text boxes
@@ -66,37 +73,34 @@ namespace TravelExperts.Forms
             SetValueLabel(label_ProductSupplierTotal, totalProductSuppliers);
             SetValueLabel(label_TotalProducts, totalProducts);
             SetValueLabel(label_TotalSuppliers, totalSuppliers);
-            label_TotalOrders.Text = $"{index+1} / {totalProducts}";
+            label_TotalOrders.Text = $@"{index+1} / {totalProducts}";
         }
 
+        /// <summary>
+        /// Add a supplier to the supplier grid box
+        /// </summary>
+        /// <param name="supplier">supplier to be added</param>
         private void AddSupplierGridItem(Supplier supplier)
         {
             // Add new data to data grid view
-            dataGridView_Suppliers.Rows.Add(new string[]
-            {
-                    supplier.SupplierId.ToString(),
-                    supplier.SupName,
-                    "x"
-            });
+            dataGridView_Suppliers.Rows.Add(supplier.SupplierId.ToString(), supplier.SupName, "x");
         }
 
+        /// <summary>
+        /// Add a product to the products grid box
+        /// </summary>
+        /// <param name="product">product to be added</param>
         private void AddProductGridItem(Product product)
         {
             var i = GetProductIndex(product.ProductId);
 
             // Add new data to data grid view
-            dataGridView_Products.Rows.Add(new string[]
-            {
-                    (i+1).ToString(), // list index
-                    product.ProductId.ToString(),
-                    product.ProdName
-            });
+            dataGridView_Products.Rows.Add((i+1).ToString(), product.ProductId.ToString(), product.ProdName);
         }
-
+        
         private void FillGridBox(int productId)
         {
             var products = DataContext.Products.ToList();
-            var product = GetProduct(productId);
             var suppliers = GetSuppliers(productId);
 
             // Clear data grid view of old data
@@ -114,11 +118,17 @@ namespace TravelExperts.Forms
             dataGridView_Products.Rows[SelectedProductIndex].Selected = true;
         }
 
+        /// <summary>
+        /// Update the user interface with default values
+        /// </summary>
         private void UpdateInterface()
         {
             UpdateInterface(GetProductByIndex(0).ProductId);
         }
 
+        /// <summary>
+        /// Update interface for specific product
+        /// </summary>
         public void UpdateInterface(int productId)
         {
             SelectedProductIndex = GetProductIndex(productId);
@@ -127,7 +137,7 @@ namespace TravelExperts.Forms
             FillGridBox(productId);
 
             label_Unsaved.Visible = false;
-            button_Save.Text = "save";
+            button_Save.Text = @"save";
         }
 
         private void NewProduct()
@@ -143,12 +153,12 @@ namespace TravelExperts.Forms
             textBox_Name.Text = "";
 
             // Set order count to new / orders
-            label_TotalOrders.Text = "NEW / " + DataContext.Products.Count().ToString();
+            label_TotalOrders.Text = @"NEW / " + DataContext.Products.Count();
             // Unsaved = true
             label_Unsaved.Visible = true;
 
             // Change save button to "create"
-            button_Save.Text = "create";
+            button_Save.Text = @"create";
         }
 
         private void SaveProduct()
@@ -203,11 +213,15 @@ namespace TravelExperts.Forms
         {
             var product = GetProductByIndex(SelectedProductIndex);
 
-            var supplier = (from PS
-                            in DataContext.Products_Suppliers
-                            where PS.ProductId == product.ProductId 
-                                && PS.SupplierId == int.Parse(dataGridView_Suppliers.Rows[row].Cells[0].Value.ToString())
-                            select PS).First();
+            // local function to match product id and supplier id
+            bool MatchIdAndSupplierId(Products_Supplier ps)
+            {
+                return ps.ProductId == product.ProductId
+                    && ps.SupplierId == int.Parse((string) dataGridView_Suppliers.Rows[row].Cells[0].Value);
+            }
+
+            // grab first supplier
+            var supplier = DataContext.Products_Suppliers.First(MatchIdAndSupplierId);
 
             var bookings = Util.Get(DataContext.BookingDetails.ToArray(), supplier);
             var pkgSuppliers = Util.Get(DataContext.Packages_Products_Suppliers.ToArray(), supplier);
@@ -223,13 +237,11 @@ namespace TravelExperts.Forms
 
         private void EditProductSupplier(int row)
         {
-            var supplier = (from Sup 
-                            in DataContext.Suppliers 
-                            where Sup.SupplierId == int.Parse(dataGridView_Suppliers.Rows[row].Cells[0].Value.ToString()) 
-                            select Sup).First();
+            var supplier = DataContext.Suppliers.Single(s 
+                => s.SupplierId == int.Parse(dataGridView_Suppliers.Rows[row].Cells[0].Value.ToString()));
             var product = GetProductByIndex(SelectedProductIndex);
 
-            EditSupplier form = new EditSupplier(DataContext, this, product.ProductId, supplier);
+            var form = new EditSupplier(DataContext, this, product.ProductId, supplier);
             form.Show();
         }
 
@@ -238,7 +250,7 @@ namespace TravelExperts.Forms
          */
         private void Products_Load(object sender, EventArgs e)
         {
-            var query = from Product in DataContext.Products select Product;
+            var query = from product in DataContext.Products select product;
 
             UpdateInterface(query.First().ProductId);
         }
@@ -317,12 +329,17 @@ namespace TravelExperts.Forms
          */
         private void button_Save_Click(object sender, EventArgs e)
         {
-            // If the save button is in save mode, save the product
-            if (button_Save.Text == "save")
-                SaveProduct();
-            // else, if button is in create mode, create a product
-            else if (button_Save.Text == "create")
-                CreateProduct();
+            switch (button_Save.Text)
+            {
+                // If the save button is in save mode, save the product
+                // else, if button is in create mode, create a product
+                case "save":
+                    SaveProduct();
+                    break;
+                case "create":
+                    CreateProduct();
+                    break;
+            }
         }
 
         private void button_New_Click(object sender, EventArgs e)
