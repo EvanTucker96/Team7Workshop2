@@ -45,10 +45,9 @@
             // button_Products
             // 
             this.button_Products.Enabled = false;
-            this.button_Products.Location = new System.Drawing.Point(416, 367);
-            this.button_Products.Margin = new System.Windows.Forms.Padding(4);
+            this.button_Products.Location = new System.Drawing.Point(364, 344);
             this.button_Products.Name = "button_Products";
-            this.button_Products.Size = new System.Drawing.Size(168, 66);
+            this.button_Products.Size = new System.Drawing.Size(147, 62);
             this.button_Products.TabIndex = 0;
             this.button_Products.Text = "Access Products";
             this.button_Products.UseVisualStyleBackColor = true;
@@ -56,42 +55,47 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(205, 146);
+            this.txtUsername.Location = new System.Drawing.Point(180, 137);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(213, 22);
+            this.txtUsername.Size = new System.Drawing.Size(187, 23);
             this.txtUsername.TabIndex = 1;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(205, 188);
+            this.txtPassword.Location = new System.Drawing.Point(180, 177);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(213, 22);
+            this.txtPassword.Size = new System.Drawing.Size(187, 23);
             this.txtPassword.TabIndex = 2;
             // 
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(122, 149);
+            this.lblUsername.Location = new System.Drawing.Point(107, 140);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(77, 17);
+            this.lblUsername.Size = new System.Drawing.Size(63, 15);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "Username:";
             // 
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(126, 191);
+            this.lblPassword.Location = new System.Drawing.Point(110, 179);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(73, 17);
+            this.lblPassword.Size = new System.Drawing.Size(60, 15);
             this.lblPassword.TabIndex = 4;
             this.lblPassword.Text = "Password:";
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(216, 242);
+            this.btnLogin.Location = new System.Drawing.Point(189, 227);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(89, 38);
+            this.btnLogin.Size = new System.Drawing.Size(78, 36);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -99,9 +103,10 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(320, 242);
+            this.btnRegister.Location = new System.Drawing.Point(280, 227);
+            this.btnRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(89, 38);
+            this.btnRegister.Size = new System.Drawing.Size(78, 36);
             this.btnRegister.TabIndex = 6;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
@@ -110,10 +115,9 @@
             // btnPackages
             // 
             this.btnPackages.Enabled = false;
-            this.btnPackages.Location = new System.Drawing.Point(13, 367);
-            this.btnPackages.Margin = new System.Windows.Forms.Padding(4);
+            this.btnPackages.Location = new System.Drawing.Point(12, 344);
             this.btnPackages.Name = "btnPackages";
-            this.btnPackages.Size = new System.Drawing.Size(168, 66);
+            this.btnPackages.Size = new System.Drawing.Size(147, 62);
             this.btnPackages.TabIndex = 7;
             this.btnPackages.Text = "Access Packages";
             this.btnPackages.UseVisualStyleBackColor = true;
@@ -122,18 +126,21 @@
             // lblLogin
             // 
             this.lblLogin.AutoSize = true;
-            this.lblLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLogin.Location = new System.Drawing.Point(102, 155);
+            this.lblLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F,
+                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.lblLogin.Location = new System.Drawing.Point(89, 145);
+            this.lblLogin.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblLogin.Name = "lblLogin";
-            this.lblLogin.Size = new System.Drawing.Size(0, 55);
+            this.lblLogin.Size = new System.Drawing.Size(0, 44);
             this.lblLogin.TabIndex = 8;
             // 
             // btnLogout
             // 
             this.btnLogout.Enabled = false;
-            this.btnLogout.Location = new System.Drawing.Point(494, 12);
+            this.btnLogout.Location = new System.Drawing.Point(432, 12);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(91, 42);
+            this.btnLogout.Size = new System.Drawing.Size(79, 39);
             this.btnLogout.TabIndex = 9;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -143,28 +150,32 @@
             // lblError
             // 
             this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F,
+                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblError.ForeColor = System.Drawing.Color.Red;
-            this.lblError.Location = new System.Drawing.Point(181, 301);
+            this.lblError.Location = new System.Drawing.Point(159, 283);
+            this.lblError.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(0, 32);
+            this.lblError.Size = new System.Drawing.Size(0, 26);
             this.lblError.TabIndex = 10;
             // 
             // lblSuccess
             // 
             this.lblSuccess.AutoSize = true;
-            this.lblSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F,
+                System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.lblSuccess.ForeColor = System.Drawing.Color.Lime;
-            this.lblSuccess.Location = new System.Drawing.Point(134, 318);
+            this.lblSuccess.Location = new System.Drawing.Point(117, 298);
+            this.lblSuccess.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSuccess.Name = "lblSuccess";
-            this.lblSuccess.Size = new System.Drawing.Size(0, 32);
+            this.lblSuccess.Size = new System.Drawing.Size(0, 26);
             this.lblSuccess.TabIndex = 11;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 446);
+            this.ClientSize = new System.Drawing.Size(523, 418);
             this.Controls.Add(this.lblSuccess);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.btnLogout);
@@ -177,12 +188,10 @@
             this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.button_Products);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

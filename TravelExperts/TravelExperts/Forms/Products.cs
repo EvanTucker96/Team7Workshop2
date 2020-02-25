@@ -20,6 +20,7 @@ namespace TravelExperts.Forms
         }
 
         // Getters
+        // a ton of these are using super basic getter utilities defined in the "Utility" dir.
         private Product GetProduct(int productId)
         {
             return Util.Get(DataContext.Products.ToArray(), productId);
@@ -46,7 +47,7 @@ namespace TravelExperts.Forms
         /// </summary>
         /// <param name="label">title</param>
         /// <param name="value">value</param>
-        private static void SetValueLabel(Label label, string value)
+        private static void SetValueLabel(Control label, string value)
         {
             label.Text = label.Text.Split(':')[0] + @": " + value;
         }
@@ -83,7 +84,7 @@ namespace TravelExperts.Forms
         private void AddSupplierGridItem(Supplier supplier)
         {
             // Add new data to data grid view
-            dataGridView_Suppliers.Rows.Add(supplier.SupplierId.ToString(), supplier.SupName, "x");
+            dataGridView_Suppliers.Rows.Add(supplier.SupplierId.ToString(), supplier.SupName);
         }
 
         /// <summary>
@@ -98,6 +99,10 @@ namespace TravelExperts.Forms
             dataGridView_Products.Rows.Add((i+1).ToString(), product.ProductId.ToString(), product.ProdName);
         }
         
+        /// <summary>
+        /// Grab all product suppliers and products. Clear the grid boxes, then add new updated grid items.
+        /// </summary>
+        /// <param name="productId">product to reference suppliers from</param>
         private void FillGridBox(int productId)
         {
             var products = DataContext.Products.ToList();
@@ -175,6 +180,9 @@ namespace TravelExperts.Forms
             UpdateInterface(product.ProductId);
         }
 
+        /// <summary>
+        /// Create a temp new product, then insert into dbcontext.
+        /// </summary>
         private void CreateProduct()
         {
             var temp = new Product
@@ -190,6 +198,9 @@ namespace TravelExperts.Forms
             UpdateInterface(temp.ProductId);
         }
 
+        /// <summary>
+        /// Grab all related tables to be deleted.
+        /// </summary>
         private void DeleteProduct()
         {
             var product = GetProductByIndex(SelectedProductIndex);
@@ -197,6 +208,14 @@ namespace TravelExperts.Forms
             var bookings = Util.Get(DataContext.BookingDetails.ToArray(), suppliers);
             var pkgSuppliers = Util.Get(DataContext.Packages_Products_Suppliers.ToArray(), suppliers);
 
+            var recordTotal = 1 + suppliers.Length + bookings.Length + pkgSuppliers.Length;
+            
+            // warn user about what they're gonna to do.
+            var box = MessageBox.Show($@"Please note you're about to delete {recordTotal} total records.", @"Record deletion!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            
+            if (box == DialogResult.No)
+                return;
+            
             // Delete actual order
             DataContext.Products_Suppliers.DeleteAllOnSubmit(suppliers);
             DataContext.Packages_Products_Suppliers.DeleteAllOnSubmit(pkgSuppliers);
@@ -209,34 +228,13 @@ namespace TravelExperts.Forms
             UpdateInterface();
         }
 
-        private void DeleteProductSupplier(int row)
-        {
-            var product = GetProductByIndex(SelectedProductIndex);
-
-            // local function to match product id and supplier id
-            bool MatchIdAndSupplierId(Products_Supplier ps)
-            {
-                return ps.ProductId == product.ProductId
-                    && ps.SupplierId == int.Parse((string) dataGridView_Suppliers.Rows[row].Cells[0].Value);
-            }
-
-            // grab first supplier
-            var supplier = DataContext.Products_Suppliers.First(MatchIdAndSupplierId);
-
-            var bookings = Util.Get(DataContext.BookingDetails.ToArray(), supplier);
-            var pkgSuppliers = Util.Get(DataContext.Packages_Products_Suppliers.ToArray(), supplier);
-
-            DataContext.Products_Suppliers.DeleteOnSubmit(supplier);
-            DataContext.BookingDetails.DeleteAllOnSubmit(bookings);
-            DataContext.Packages_Products_Suppliers.DeleteAllOnSubmit(pkgSuppliers);
-
-            DataContext.SubmitChanges();
-
-            UpdateInterface(product.ProductId);
-        }
-
+        /// <summary>
+        /// Update supplier information from supplier id
+        /// </summary>
+        /// <param name="row">row to check suppliers id</param>
         private void EditProductSupplier(int row)
         {
+            // grab a single entity where supplier ids match
             var supplier = DataContext.Suppliers.Single(s 
                 => s.SupplierId == int.Parse(dataGridView_Suppliers.Rows[row].Cells[0].Value.ToString()));
             var product = GetProductByIndex(SelectedProductIndex);
@@ -250,9 +248,7 @@ namespace TravelExperts.Forms
          */
         private void Products_Load(object sender, EventArgs e)
         {
-            var query = from product in DataContext.Products select product;
-
-            UpdateInterface(query.First().ProductId);
+            UpdateInterface(DataContext.Products.First().ProductId);
         }
 
         /*
@@ -260,7 +256,7 @@ namespace TravelExperts.Forms
          */
         private void dataGridView_Products_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // If theyre clicking actual data rows, rather than sorting buttons
+            // If they're clicking actual data rows, rather than sorting buttons
             if (e.RowIndex >= 0)
                 UpdateInterface(GetProductByIndex(e.RowIndex).ProductId);
         }
@@ -273,16 +269,10 @@ namespace TravelExperts.Forms
             var product = GetProductByIndex(SelectedProductIndex);
 
             // Set save button disabled if name text is empty
-            if (textBox_Name.Text == "")
-                button_Save.Enabled = false;
-            else
-                button_Save.Enabled = true;
+            button_Save.Enabled = textBox_Name.Text != "";
 
             // Set unsaved to true if name text doesnt match selected product name
-            if (product.ProdName != textBox_Name.Text)
-                label_Unsaved.Visible = true;
-            else
-                label_Unsaved.Visible = false;
+            label_Unsaved.Visible = product.ProdName != textBox_Name.Text;
         }
 
         /*
@@ -299,7 +289,7 @@ namespace TravelExperts.Forms
         private void button_First_Click(object sender, EventArgs e)
         {
             // First product index
-            var index = 0;
+            const int index = 0;
             var productId = DataContext.Products.ToArray()[index].ProductId;
             UpdateInterface(productId);
         }
@@ -363,15 +353,13 @@ namespace TravelExperts.Forms
          */
         private void dataGridView_Suppliers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 2)
-                DeleteProductSupplier(e.RowIndex);
-            else if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
                 EditProductSupplier(e.RowIndex);
         }
 
         private void button_Create_Supplier_Click(object sender, EventArgs e)
         {
-            AddSupplier form = new AddSupplier(DataContext, this, SelectedProductIndex);
+            var form = new AddSupplier(DataContext, this, SelectedProductIndex);
             form.Show();
         }
     }

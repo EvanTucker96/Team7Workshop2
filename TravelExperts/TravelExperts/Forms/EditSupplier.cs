@@ -28,6 +28,39 @@ namespace TravelExperts.Forms
             Supplier = supplier;
         }
 
+        private Product GetProduct(int productId)
+        {
+            return Util.Get(DataContext.Products.ToArray(), productId);
+        }
+        
+        private void DeleteProductSupplier(int id)
+        {
+            var product = GetProduct(SelectedProductId);
+
+            // local function to match product id and supplier id
+            bool MatchIdAndSupplierId(Products_Supplier ps)
+            {
+                return ps.ProductId == product.ProductId
+                       && ps.SupplierId == id;
+            }
+
+            // grab first supplier
+            var supplier = DataContext.Products_Suppliers.First(MatchIdAndSupplierId);
+
+            var bookings = Util.Get(DataContext.BookingDetails.ToArray(), supplier);
+            var pkgSuppliers = Util.Get(DataContext.Packages_Products_Suppliers.ToArray(), supplier);
+
+            // Remove in db context
+            DataContext.Products_Suppliers.DeleteOnSubmit(supplier);
+            DataContext.BookingDetails.DeleteAllOnSubmit(bookings);
+            DataContext.Packages_Products_Suppliers.DeleteAllOnSubmit(pkgSuppliers);
+
+            // Push to db
+            DataContext.SubmitChanges();
+
+            Products.UpdateInterface(product.ProductId);
+        }
+        
         private void EditSupplier_Load(object sender, EventArgs e)
         {
             textBox_Id.Text = Supplier.SupplierId.ToString();
@@ -59,6 +92,12 @@ namespace TravelExperts.Forms
 
         private void EditSupplier_Leave(object sender, EventArgs e)
         {
+            Close();
+        }
+
+        private void button_Remove_Click(object sender, EventArgs e)
+        {
+            DeleteProductSupplier(int.Parse(textBox_Id.Text));
             Close();
         }
     }
