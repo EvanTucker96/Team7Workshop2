@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TravelExperts.Data;
@@ -38,8 +39,8 @@ namespace TravelExperts.Forms
             tb_Desc.Text = Package.PkgDesc;
             dtp_Start.MinDate = Convert.ToDateTime(Package.PkgStartDate);
             dtp_End.MinDate = Convert.ToDateTime(Package.PkgEndDate);
-            tb_BasePrice.Text = Package.PkgBasePrice.ToString();
-            tb_commission.Text = Package.PkgAgencyCommission.ToString() ;
+            tb_BasePrice.Text = Package.PkgBasePrice.ToString("c");
+            tb_commission.Text = Package.PkgAgencyCommission?.ToString("c");
         }
 
         private void tb_PkgName_TextChanged(object sender, EventArgs e)
@@ -71,7 +72,7 @@ namespace TravelExperts.Forms
             }
             else
             {
-                MessageBox.Show("Commission cannot be higher than the price!", "Error");
+                MessageBox.Show("Price error (negative or invalid)!", "Error");
                 return;
             }
              
@@ -121,13 +122,21 @@ namespace TravelExperts.Forms
 
         public bool ValidatePrice()
         {
-            var baseprice = decimal.Parse(tb_BasePrice.Text);
-            var commission = decimal.Parse(tb_commission.Text);
+            decimal baseprice = decimal.Parse(tb_BasePrice.Text.Replace("$", ""));
+            //decimal baseprice = Convert.ToDecimal(tb_BasePrice.Text);
+            decimal commission = decimal.Parse(tb_commission.Text.Replace("$", ""));
 
-            if (baseprice <= commission)
-               return false;
+
+            if (commission < 0)
+                return false;
+            else if (baseprice < 0)
+                return false;
+            else if (baseprice <= commission)
+                return false;
+            else if (baseprice >= commission)
+                return true;
             else
-               return true;
+                return true;
         }
 
         private void btn_AddProducts_Click(object sender, EventArgs e)
